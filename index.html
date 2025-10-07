@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APP imagenes con IA de Edwin Bikes</title>
+    <link rel="stylesheet" href="index.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/genai": "https://esm.sh/@google/genai@1.0.0"
+        }
+      }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>APP imagenes con IA de Edwin Bikes</h1>
+    </header>
+    <main class="container">
+        <section class="controls" aria-labelledby="controls-heading">
+            <h2 id="controls-heading">Controles</h2>
+            <div class="control-group">
+                <label for="image-upload">1. Sube tu Imagen</label>
+                <input type="file" id="image-upload" accept="image/*">
+            </div>
+            <div id="original-image-container">
+                <img id="original-image" src="" alt="Vista previa de la imagen original" style="display: none;">
+                <p id="upload-placeholder">Sube una imagen para comenzar</p>
+            </div>
+            <div class="control-group">
+                <label>2. Elige el tipo de salida</label>
+                <div class="radio-group">
+                    <label for="mode-edit">
+                        <input type="radio" id="mode-edit" name="mode" value="edit" checked>
+                        Editar Imagen
+                    </label>
+                    <label for="mode-video">
+                        <input type="radio" id="mode-video" name="mode" value="video">
+                        Crear Video
+                    </label>
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="prompt-examples">3. O elige una idea (Opcional)</label>
+                <select id="prompt-examples">
+                    <option value="" selected disabled>Selecciona un ejemplo...</option>
+                    <optgroup label="Edición de Imagen">
+                        <!-- Para Concursos y Calidad Profesional -->
+                        <option value="Ajusta la imagen para un concurso de fotografía, enfocándote en la nitidez, el contraste y una paleta de colores impactante.">Mejora para concurso</option>
+                        <option value="Realza los detalles y la textura para un acabado de alta definición, digno de una impresión de galería.">Acabado de alta definición</option>
+                        <option value="Aplica una corrección de color cinematográfica para un ambiente dramático y profesional.">Color cinematográfico</option>
+                        <option value="Convierte la imagen a blanco y negro con alto contraste, resaltando formas y texturas para un look clásico.">Blanco y negro de alto contraste</option>
+                        <option value="Optimiza la iluminación y las sombras para maximizar el impacto visual y guiar la mirada del espectador.">Optimizar iluminación y sombras</option>
+                        <!-- Composición y Encuadre -->
+                        <option value="Reencuadra la imagen aplicando la regla de los tercios para mejorar el equilibrio de la composición.">Aplicar regla de los tercios</option>
+                        <!-- Estilos Artísticos y Creativos -->
+                        <option value="Convierte la foto en una pintura al óleo con pinceladas marcadas.">Estilo pintura al óleo</option>
+                        <option value="Dale un estilo de ciencia ficción cyberpunk con luces de neón.">Estilo Cyberpunk</option>
+                        <option value="Crea un efecto de doble exposición, combinando la imagen con un paisaje natural.">Efecto de doble exposición</option>
+                    </optgroup>
+                    <optgroup label="Creación de Video">
+                        <option value="Anima esta imagen, haciendo que las nubes se muevan lentamente.">Animar nubes en movimiento</option>
+                        <option value="Crea un video corto donde el sujeto principal parpadea y sonríe sutilmente.">Animación sutil del sujeto</option>
+                        <option value="Transforma esta imagen en una escena lluviosa, con gotas de lluvia cayendo.">Crear escena de lluvia</option>
+                        <option value="Haz un zoom lento hacia el centro de la imagen.">Zoom lento</option>
+                        <option value="Añade un efecto de 'travelling' lateral, como si la cámara se moviera de izquierda a derecha.">Efecto 'travelling' lateral</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="prompt-input">4. Describe la Edición o Animación</label>
+                <textarea id="prompt-input" rows="5" placeholder="Ej: Haz que el cielo sea morado o Anima las olas del mar"></textarea>
+            </div>
+            <button id="action-button" disabled>Editar Imagen</button>
+        </section>
+        <section class="results" aria-labelledby="results-heading">
+            <h2 id="results-heading">Resultado</h2>
+            <div id="result-container">
+                <div id="loader" class="hidden"></div>
+                <p id="result-placeholder">Tu creación aparecerá aquí.</p>
+            </div>
+            <button id="download-button" class="hidden">Descargar</button>
+        </section>
+    </main>
+    <script type="module" src="index.tsx"></script>
+</body>
+</html>
